@@ -5,7 +5,7 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Fork of the Zowe™ COBOL Language Support</name>
+    <name>Fork of the Zowe COBOL Language Support</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="hand-of-doom@nib-labs.io"
@@ -16,7 +16,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Fork of the Zowe™ COBOL Language Support Plugin.
+    Fork of the Zowe COBOL Language Support Plugin.
     Provides TextMate syntax highlighting and LSP support for the IBM Enterprise COBOL
   ]]></description>
 
