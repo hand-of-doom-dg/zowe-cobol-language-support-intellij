@@ -79,10 +79,18 @@ class CobolLanguageClient(project: Project) : LanguageClientImpl(project) {
             }
 
             Sections.CPY_EXTENSIONS -> {
-              logMessage(MessageParams(MessageType.Info, "$section is not correctly recognized yet 4"))
-              result.add(listOf(".CPY", ".COPY", ".cpy", ".copy", ""))
-              //            val computed = loadProcessorGroupCopybookExtensionsConfig(item, cfg as List<String>)
-              //            result.add(computed)
+                val cpyExtensions = VSCodeSettingsAdapterService.getService()
+                    .getListOfStringsConfiguration(workspaceFolders[0], Sections.CPY_EXTENSIONS)
+                if (cpyExtensions.isEmpty()) {
+                    result.add(listOf(".CPY", ".COPY", ".cpy", ".copy", ""))
+                } else {
+                    result.add(cpyExtensions)
+                }
+                logMessage(
+                    MessageParams(MessageType.Info, "For ${item.scopeUri} using cpy local paths: $cpyExtensions")
+                )
+                //logMessage(MessageParams(MessageType.Info, "$section is not correctly recognized yet 4"))
+                //result.add(listOf(".CPY", ".COPY", ".cpy", ".copy", ""))
             }
 
             Sections.SQL_BACKEND -> {

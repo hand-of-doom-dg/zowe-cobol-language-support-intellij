@@ -26,45 +26,46 @@ import java.nio.file.Path
 @Service
 class VSCodeSettingsAdapterService {
 
-  companion object {
-    fun getService(): VSCodeSettingsAdapterService = service()
-  }
-
-  /**
-   * Read the .vscode/settings.json file section
-   * @param workspaceFolder the workspace folder path to search for the file in
-   * @param readBlock the function to handle the read section
-   * @return the result of the read section handling or error if file is not found
-   */
-  private fun <T : Any> readConfigFileSection(workspaceFolder: Path, readBlock: (FileReader) -> T?): T? {
-    return try {
-      val settingsPath = workspaceFolder.resolve(".vscode").resolve("settings.json")
-      val settingsFile = File(settingsPath.toUri())
-      FileReader(settingsFile).use(readBlock)
-    } catch (e: FileNotFoundException) {
-      // TODO: logger
-//        println("settings.json file not found")
-      null
+    companion object {
+        fun getService(): VSCodeSettingsAdapterService = service()
     }
-  }
 
-  /**
-   * Read the .vscode/settings.json file section and expect to return a list of strings as a result
-   * @param workspaceFolder the workspace folder path to search for the file in
-   * @param section the section to read
-   * @return the list of strings, read from the section, or empty list on failure or if there are no items
-   */
-  fun getListOfStringsConfiguration(workspaceFolder: Path, section: Sections): List<String> {
-    return readConfigFileSection(workspaceFolder) { settingsJsonReader ->
-      val settingsJsonElement = JsonParser.parseReader(settingsJsonReader)
-      if (settingsJsonElement.isJsonObject) {
-        val settingsJsonObject = settingsJsonElement.asJsonObject
-        val settingsDialectJsonArray = settingsJsonObject.get(section.toString())?.asJsonArray
-        settingsDialectJsonArray?.map { it.asString } ?: listOf()
-      } else {
-        listOf()
-      }
-    } ?: listOf()
-  }
+    /**
+     * Read the settings file section
+     * @param workspaceFolder the workspace folder path to search for the file in
+     * @param readBlock the function to handle the read section
+     * @return the result of the read section handling or error if file is not found
+     */
+    private fun <T : Any> readConfigFileSection(workspaceFolder: Path, readBlock: (FileReader) -> T?): T? {
+        return try {
+            //val settingsPath = workspaceFolder.resolve(".vscode").resolve("settings.json")      // use this to read from .vscode/settings.json
+            val settingsPath = workspaceFolder.resolve("cobol-settings.json")
+            val settingsFile = File(settingsPath.toUri())
+            FileReader(settingsFile).use(readBlock)
+        } catch (e: FileNotFoundException) {
+            // TODO: logger
+//        println("settings.json file not found")
+            null
+        }
+    }
+
+    /**
+     * Read the .vscode/settings.json file section and expect to return a list of strings as a result
+     * @param workspaceFolder the workspace folder path to search for the file in
+     * @param section the section to read
+     * @return the list of strings, read from the section, or empty list on failure or if there are no items
+     */
+    fun getListOfStringsConfiguration(workspaceFolder: Path, section: Sections): List<String> {
+        return readConfigFileSection(workspaceFolder) { settingsJsonReader ->
+            val settingsJsonElement = JsonParser.parseReader(settingsJsonReader)
+            if (settingsJsonElement.isJsonObject) {
+                val settingsJsonObject = settingsJsonElement.asJsonObject
+                val settingsDialectJsonArray = settingsJsonObject.get(section.toString())?.asJsonArray
+                settingsDialectJsonArray?.map { it.asString } ?: listOf()
+            } else {
+                listOf()
+            }
+        } ?: listOf()
+    }
 
 }

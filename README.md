@@ -26,19 +26,23 @@ The feature provides a functionality to autocomplete instructions, suggesting th
 
 The plug-in recognizes local copybooks, used in COBOL sources. The .cpy/.copy files content is highlighted as COBOL source code.
 To use local copybooks:
-1. Create **.vscode** folder in your opened workspace
-2. Create **settings.json** in the **.vscode** folder
-3. Enter workspace relative or absolute paths of the folders, where copybooks are placed
+1. Create **cobol-settings.json** in the root of the workspace (project)
+2. Enter workspace relative or absolute paths of the folders, where copybooks are placed
+3. Enter copybook extensions (defaults to .cpy and .copy)
 
-Example of the **settings.json** content:
+Example of the **cobol-settings.json** content:
 ```json5
 {
   //...
   "cobol-lsp.cpy-manager.paths-local": [
-    ".copybooks/zowe-profile-1/DATA.SET.PATH1",
-    ".copybooks/some-path",
-    "/some/absolute/path"
+    "copybooks/lib1",
+    "copybooks/lib2",
+    "/absolute/path/to/copybooks/lib3"
   ],
+  "cobol-lsp.cpy-manager.copybook-extensions": [
+    ".cpy",
+    ".CPY"
+  ]
   //...
 }
 ```
