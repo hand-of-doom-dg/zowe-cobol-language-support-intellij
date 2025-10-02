@@ -27,7 +27,7 @@ plugins {
 
 group = properties("pluginGroup").get()
 version = properties("pluginVersion").get()
-val lsp4ijVersion = "0.7.0"
+val lsp4ijVersion = "0.16.1"
 
 repositories {
   mavenCentral()
