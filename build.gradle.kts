@@ -52,7 +52,7 @@ kotlin {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 intellijPlatform {
   pluginConfiguration {
-    version = properties("platformVersion").get()
+    version = properties("pluginVersion").get()
     ideaVersion {
       sinceBuild = properties("pluginSinceBuild").get()
       untilBuild = provider { null }

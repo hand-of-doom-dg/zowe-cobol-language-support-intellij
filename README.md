@@ -1,4 +1,8 @@
-# Zowe™ COBOL Language Support plug-in for IntelliJ IDEA™
+# Fork of Zowe™ COBOL Language Support plug-in for IntelliJ IDEA™
+
+This repository is a for of [Zowe™ COBOL Language Support plug-in for IntelliJ IDEA™](https://github.com/zowe/zowe-cobol-language-support-intellij).
+
+The purpose of this fork is to provide updated builds, new features and bug fixes.
 
 Provides: 
 - syntax highlighting support using TextMate bundle from [eclipse-che4z/che-che4z-lsp-for-cobol](https://github.com/eclipse-che4z/che-che4z-lsp-for-cobol)
@@ -24,7 +28,7 @@ The plug-in recognizes local copybooks, used in COBOL sources. The .cpy/.copy fi
 To use local copybooks:
 1. Create **.vscode** folder in your opened workspace
 2. Create **settings.json** in the **.vscode** folder
-3. Enter relative or absolute paths of the folders, where copybooks are placed
+3. Enter workspace relative or absolute paths of the folders, where copybooks are placed
 
 Example of the **settings.json** content:
 ```json5
